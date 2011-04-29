@@ -2,7 +2,7 @@
 
 ## 概要 / what is this.
 これは、FlashがサポートしているXmlSocketのサーバー側実装です。
-Javaで書かれています。
+<br />Javaで書かれています。
 
 This is the server for XMLsocket which supported by Flex / Flash.
 This server is written in Java.
