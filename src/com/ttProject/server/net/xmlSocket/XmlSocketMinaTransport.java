@@ -155,6 +155,7 @@ public class XmlSocketMinaTransport {
 		acceptor.setReuseAddress(true);
 		acceptor.setHandler(ioHandler);
 		acceptor.bind(new InetSocketAddress(port));
+		log.info("server start");
 		XmlSocketConnManager.getInstance().getAdapter().start();
 	}
 	public void stop() {
