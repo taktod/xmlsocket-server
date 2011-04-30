@@ -2,13 +2,20 @@
 import com.ttProject.php.ArgumentManager;
 import java.lang.String;
 
-// シングルトンにする必要あり。
 class ArgumentUtil {
+	private static $instance = null;
+	
 	private $args;
-	public function __construct() {
+	private function __construct() {
 		$arg_manager = ArgumentManager::getInstance();
 		global $_JAVAARG;
 		$this->args = $arg_manager->getArgument($_JAVAARG);
+	}
+	public static function getInstance() {
+		if(self::$instance == null) {
+			self::$instance = new ArgumentUtil();
+		}
+		return self::$instance;
 	}
 	public function getConnection() {
 		return $this->getJavaObject(0);

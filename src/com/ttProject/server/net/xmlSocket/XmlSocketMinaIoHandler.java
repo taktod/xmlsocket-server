@@ -16,14 +16,17 @@ public class XmlSocketMinaIoHandler extends IoHandlerAdapter {
 		if(message instanceof IoBuffer) {
 			XmlSocketConnection xmlConn = (XmlSocketConnection)session.getAttribute("conn");
 			IoBuffer buf = (IoBuffer)message;
-			if(new String(buf.array()).contains("<policy-file-request/>")) {
-				// セキュリティーポリシーの応答の処理
+			String inData = new String(buf.array());
+			if(inData.contains("<policy-file-request/>")) {
 				xmlConn.crossDomain();
 				xmlConn.close();
 			}
+			else if(inData.contains("<pong />")){
+				xmlConn.resetPingCount();
+				return;
+			}
 			XmlSocketConnManager.getInstance().getAdapter().getData(xmlConn, buf);
 		}
-//		super.messageReceived(session, message);
 	}
 	@Override
 	public void sessionCreated(IoSession session) throws Exception {
@@ -45,8 +48,6 @@ public class XmlSocketMinaIoHandler extends IoHandlerAdapter {
 	@Override
 	public void exceptionCaught(IoSession session, Throwable cause)
 			throws Exception {
-		// ここで応答してはいけない。オリジナルのExceptionが動作してしまう。
 		session.close(true);
-//		super.exceptionCaught(session, cause);
 	}
 }

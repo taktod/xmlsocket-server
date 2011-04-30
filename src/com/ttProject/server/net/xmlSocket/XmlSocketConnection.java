@@ -70,4 +70,16 @@ public class XmlSocketConnection {
 	public void close() {
 		session.close(true);
 	}
+	public String getRemoteAddress() {
+		return session.getRemoteAddress().toString();
+	}
+	public String getLocalAddress() {
+		return session.getLocalAddress().toString();
+	}
+	public long getWriteBytes(){
+		return session.getWrittenBytes();
+	}
+	public long getReadBytes() {
+		return session.getReadBytes();
+	}
 }

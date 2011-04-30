@@ -159,8 +159,8 @@ public class XmlSocketMinaTransport {
 		XmlSocketConnManager.getInstance().getAdapter().start();
 	}
 	public void stop() {
-		XmlSocketConnManager.getInstance().getAdapter().stop();
 		if(acceptor != null) {
+			XmlSocketConnManager.getInstance().getAdapter().stop();
 			acceptor.unbind();
 		}
 	}
