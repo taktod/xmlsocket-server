@@ -1,4 +1,6 @@
-package com.ttProject.server.net.xmlSocket;
+package com.ttProject.java;
+
+import com.ttProject.server.net.xmlSocket.XmlSocketMinaTransport;
 
 public class Main {
 	public static void main(String[] args) {

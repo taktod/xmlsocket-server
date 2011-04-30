@@ -20,12 +20,26 @@ public class XmlSocketConnection {
 		sendData(XmlSocketConnManager.getInstance().getAdapter().crossDomainPolicy());
 	}
 	// 受け取り側はなんらかのイベントリスナーでやっておく。
-	protected void recvData(IoBuffer inData) {
+	public void resetPingCount() {
 		pingCount = 0;
-		// ここでなんかする。
+	}
+	public void sendHexString(String hexString) {
+		IoBuffer buf = IoBuffer.allocate(hexString.getBytes().length + 10);
+		byte[] bytes = new byte[hexString.length() / 2];
+		for(int i = 0;i < bytes.length;i ++) {
+			bytes[i] = (byte)Integer.parseInt(hexString.substring(i * 2, (i+1) * 2), 16);
+		}
+		buf.put(bytes);
+		buf.put((byte)0x00);
+		buf.flip();
+		sendData(buf);
 	}
 	public void sendData(String data) {
-		sendData(data.getBytes());
+		IoBuffer buf = IoBuffer.allocate(data.getBytes().length + 10);
+		buf.put(data.getBytes());
+		buf.put((byte)0x00);
+		buf.flip();
+		sendData(buf);
 	}
 	public void sendData(byte[] data) {
 		IoBuffer buf = IoBuffer.allocate(data.length + 10);
@@ -48,10 +62,7 @@ public class XmlSocketConnection {
 			session.close(true);
 			return;
 		}
-		IoBuffer buf = IoBuffer.allocate(256);
-		buf.put("<ping />¥0".getBytes());
-		buf.flip();
-		session.write(buf);
+		sendData("<ping />");
 	}
 	public long getId() {
 		return session.getId();
