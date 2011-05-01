@@ -36,10 +36,4 @@ PHPで動作させるには以下が必要 / for php execution
 
 
 <br />
-テスト用のクライアント / client swf player for test.
-<object classid="clsid:D27CDB6E-AE6D11cf96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/ flash/swflash.cab#version=5,0,0,0" height="417" width="455"> <param name="movie" value="http://poepoemix.appspot.com/swf/XmlSocket.swf" />
-<param name="quality" value=high />
-<param name="bgcolor" value=#000000 />
-<embed src="http://poepoemix.appspot.com/swf/XmlSocket.swf" quality=high bgcolor=#000000 width="450" height="417"
-type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download
-/index.cgi?P1_Prod_Version=ShockwaveFlash"> </embed></object>
+[テスト用のクライアント](http://poepoemix.appspot.com/swf/XmlSocket.swf) / [client swf player for test.](http://poepoemix.appspot.com/swf/XmlSocket.swf)
