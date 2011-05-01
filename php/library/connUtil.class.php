@@ -25,6 +25,5 @@ class ConnUtil {
 		foreach($conns as $conn) {
 			$this->sendUser($conn, $msg);
 		}
-		$log->info("hello");
 	}
 }
