@@ -4,6 +4,12 @@ import org.apache.mina.core.buffer.IoBuffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * XmlSocketAdapter to handle main event.
+ * <pre>
+ * to make original server application please extends this class.
+ * </pre>
+ */
 public class XmlSocketAdapter {
 	protected static Logger log = LoggerFactory.getLogger(XmlSocketAdapter.class);
 
@@ -41,7 +47,7 @@ public class XmlSocketAdapter {
 	 * @param data IoBuffer data from client.
 	 */
 	public void getData(XmlSocketConnection conn, IoBuffer data) {
-		
+		log.debug("getData from client");
 	}
 	/**
 	 * reply for crossDomain

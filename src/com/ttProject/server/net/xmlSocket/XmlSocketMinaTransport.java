@@ -129,7 +129,7 @@ public class XmlSocketMinaTransport {
 	}
 	private void initIoHandler() {
 		if(ioHandler == null) {
-			// if no handler use default.
+			log.info("No Xml IoHandler associated - use default...");
 			ioHandler = new XmlSocketMinaIoHandler();
 		}
 	}
@@ -141,10 +141,17 @@ public class XmlSocketMinaTransport {
 		if(useHeapBuffers) {
 			IoBuffer.setAllocator(new SimpleBufferAllocator());
 		}
+		log.info("XmlSocket Transport Setting");
+		log.info("Connection Threads: {}", connectionThreads);
+		log.info("I/O Threads: {}", ioThreads);
+
 		Executor connectionExecutor = Executors.newFixedThreadPool(connectionThreads);
 		Executor ioExecutor = Executors.newFixedThreadPool(ioThreads);
 		acceptor = new NioSocketAcceptor(connectionExecutor, new NioProcessor(ioExecutor));
-		
+
+		log.info("TCP No Delay: {}", tcpNoDelay);
+		log.info("ReceiveBufferSize: {}", receiveBufferSize);
+		log.info("SendBufferSize: {}", sendBufferSize);
 		SocketSessionConfig sessionConf = acceptor.getSessionConfig();
 		sessionConf.setReuseAddress(true);
 		sessionConf.setTcpNoDelay(tcpNoDelay);
