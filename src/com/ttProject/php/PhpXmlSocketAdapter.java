@@ -19,11 +19,18 @@ import com.caucho.vfs.WriteStream;
 import com.ttProject.server.net.xmlSocket.XmlSocketAdapter;
 import com.ttProject.server.net.xmlSocket.XmlSocketConnection;
 
+/**
+ * sample socket adapter for PHP
+ */
 public class PhpXmlSocketAdapter extends XmlSocketAdapter {
+	/** quercus object */
 	private MyQuercus quercus;
 	public PhpXmlSocketAdapter() {
 		quercus = new MyQuercus();
 	}
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void start() {
 		try {
@@ -32,6 +39,9 @@ public class PhpXmlSocketAdapter extends XmlSocketAdapter {
 		catch (IOException e) {
 		}
 	}
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void stop() {
 		try {
@@ -40,6 +50,9 @@ public class PhpXmlSocketAdapter extends XmlSocketAdapter {
 		catch (IOException e) {
 		}
 	}
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean xmlConnect(XmlSocketConnection conn) {
 		try {
@@ -49,6 +62,9 @@ public class PhpXmlSocketAdapter extends XmlSocketAdapter {
 		}
 		return true;
 	}
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void xmlDisconnect(XmlSocketConnection conn) {
 		try {
@@ -57,6 +73,9 @@ public class PhpXmlSocketAdapter extends XmlSocketAdapter {
 		catch (IOException e) {
 		}
 	}
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void getData(XmlSocketConnection conn, IoBuffer data) {
 		try {
@@ -66,6 +85,9 @@ public class PhpXmlSocketAdapter extends XmlSocketAdapter {
 		catch (IOException e) {
 		}
 	}
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String crossDomainPolicy() {
 		StringBuilder sb = new StringBuilder();
@@ -84,6 +106,9 @@ public class PhpXmlSocketAdapter extends XmlSocketAdapter {
 		}
 		return sb.toString();
 	}
+	/**
+	 * private quercus class for php engine.
+	 */
 	private class MyQuercus extends Quercus {
 		private String arg = "";
 		public MyQuercus() {
