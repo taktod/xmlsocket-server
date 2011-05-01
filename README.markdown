@@ -28,9 +28,18 @@ javaee-api-5.1.1.jar
 <br />logback-core-0.9.18.jar
 <br />slf4j-api-1.5.10.jar
 
-PHPで動作させるには以下が必要(いまのところ未実装) / for php execution(not yet.)
+PHPで動作させるには以下が必要 / for php execution
 <br />inject-16.jar
 <br />javamail-141.jar
 <br />resin.jar
 (すべてQuercusのダウンロードページのwarファイルより入手 / please download from quercus project. war archive does have them.)
 
+
+<br />
+テスト用のクライアント / client swf player for test.
+<object classid="clsid:D27CDB6E-AE6D11cf96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/ flash/swflash.cab#version=5,0,0,0" height="417" width="455"> <param name="movie" value="http://poepoemix.appspot.com/swf/XmlSocket.swf" />
+<param name="quality" value=high />
+<param name="bgcolor" value=#000000 />
+<embed src="http://poepoemix.appspot.com/swf/XmlSocket.swf" quality=high bgcolor=#000000 width="450" height="417"
+type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download
+/index.cgi?P1_Prod_Version=ShockwaveFlash"> </embed></object>
