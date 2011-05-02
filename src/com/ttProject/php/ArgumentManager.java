@@ -13,9 +13,9 @@ import java.util.WeakHashMap;
 public class ArgumentManager {
 	private static ArgumentManager instance = new ArgumentManager();
 	private Map<String, Object[]> arguments = new WeakHashMap<String, Object[]>();
+	private Object retval = null;
 	private int id = 0;
 	private ArgumentManager() {
-		
 	}
 	public synchronized static ArgumentManager getInstance() {
 		if(instance == null) {
@@ -40,5 +40,17 @@ public class ArgumentManager {
 	 */
 	public Object[] getArgument(String key) {
 		return arguments.get(key);
+	}
+	/**
+	 * @return the retval
+	 */
+	public Object getRetval() {
+		return retval;
+	}
+	/**
+	 * @param retval the retval to set
+	 */
+	public void setRetval(Object retval) {
+		this.retval = retval;
 	}
 }

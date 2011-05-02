@@ -24,9 +24,9 @@ import com.ttProject.server.net.xmlSocket.XmlSocketConnection;
  */
 public class PhpXmlSocketAdapter extends XmlSocketAdapter {
 	/** quercus object */
-	private MyQuercus quercus;
+	private QuercusEx quercus;
 	public PhpXmlSocketAdapter() {
-		quercus = new MyQuercus();
+		quercus = new QuercusEx();
 	}
 	/**
 	 * {@inheritDoc}
@@ -109,9 +109,9 @@ public class PhpXmlSocketAdapter extends XmlSocketAdapter {
 	/**
 	 * private quercus class for php engine.
 	 */
-	private class MyQuercus extends Quercus {
+	private class QuercusEx extends Quercus {
 		private String arg = "";
-		public MyQuercus() {
+		public QuercusEx() {
 			super();
 			this.init();
 			this.start();
