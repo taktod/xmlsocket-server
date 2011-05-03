@@ -1,5 +1,6 @@
 package com.ttProject.php;
 
+import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -54,7 +55,7 @@ public class ArgumentManager {
 		this.retval = retval;
 	}
 	public String toByteString(Object o) {
-		byte[] bytes = o.toString().getBytes();
+		byte[] bytes = o.toString().getBytes(Charset.forName("UTF8"));
 		StringBuilder bs = new StringBuilder();
 		String hex;
 		for(byte b : bytes) {
