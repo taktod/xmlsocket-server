@@ -21,7 +21,10 @@ class ArgumentUtil {
 		return $this->getJavaObject(0);
 	}
 	public function getStringData() {
-		return $this->getIoBufferAsString(1);
+		$arg_manager = ArgumentManager::getInstance();
+		$string = $thig->getIoBufferAsString(1);
+		$string = $arg_manager->toByteString($string);
+		return pack("H*", $string);
 	}
 	public function getJavaObject($index) {
 		if($index >= count($this->args)) {
