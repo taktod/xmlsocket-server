@@ -1,5 +1,8 @@
 package com.ttProject.server.net.xmlSocket;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.apache.mina.core.buffer.IoBuffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,15 @@ import org.slf4j.LoggerFactory;
  */
 public class XmlSocketAdapter {
 	protected static Logger log = LoggerFactory.getLogger(XmlSocketAdapter.class);
+	private Map<Object, Object> attribute = new ConcurrentHashMap<Object, Object>(1);
+
+	private Object obj;
+	public Object getSr() {
+		return obj;
+	}
+	public void setSr(Object obj) {
+		this.obj = obj;
+	}
 
 	/**
 	 * event for starting xmlsocketServer
@@ -57,5 +69,24 @@ public class XmlSocketAdapter {
 		return "<cross-domain-policy>"
 			+ "<allow-access-from domain='*' to-port='*' />"
 			+ "</cross-domain-policy>";
+	}
+	public Object getAttribute(Object key, Object defaultObject) {
+		Object obj = attribute.get(key);
+		if(obj == null) {
+			return defaultObject;
+		}
+		return obj;
+	}
+	public Object getAttribute(Object key) {
+		return getAttribute(key, null);
+	}
+	public Object setAttribute(Object key, Object value) {
+		return attribute.put(key, value);
+	}
+	public Object removeAttribute(Object key) {
+		return attribute.remove(key);
+	}
+	public boolean containsKey(Object key) {
+		return attribute.containsKey(key);
 	}
 }

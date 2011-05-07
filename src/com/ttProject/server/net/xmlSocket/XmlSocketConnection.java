@@ -135,4 +135,42 @@ public class XmlSocketConnection {
 	public long getReadBytes() {
 		return session.getReadBytes();
 	}
+	/**
+	 * get the attribute for connection
+	 * @param key
+	 * @param defaultObject
+	 * @return object
+	 */
+	public Object getAttribute(Object key, Object defaultObject) {
+		Object obj = session.getAttribute(key, defaultObject);
+		if(obj == null) {
+			return defaultObject;
+		}
+		return obj;
+	}
+	/**
+	 * get the attribute for connection
+	 * @param key
+	 * @return object
+	 */
+	public Object getAttribute(Object key) {
+		return getAttribute(key, null);
+	}
+	/**
+	 * set the attribute to connection
+	 * @param key
+	 * @param value
+	 * @return object
+	 */
+	public Object setAttribute(Object key, Object value) {
+		return session.setAttribute(key, value);
+	}
+	/**
+	 * remove the attribute
+	 * @param key
+	 * @return object
+	 */
+	public Object removeAttribute(Object key) {
+		return session.removeAttribute(key);
+	}
 }

@@ -4,7 +4,6 @@ import java.lang.String;
 
 class ArgumentUtil {
 	private static $instance = null;
-	
 	private $args;
 	private function __construct() {
 		$arg_manager = ArgumentManager::getInstance();
@@ -17,12 +16,15 @@ class ArgumentUtil {
 		}
 		return self::$instance;
 	}
-	public function getConnection() {
+	public function getAdapter() {
 		return $this->getJavaObject(0);
+	}
+	public function getConnection() {
+		return $this->getJavaObject(1);
 	}
 	public function getStringData() {
 		$arg_manager = ArgumentManager::getInstance();
-		$string = $thig->getIoBufferAsString(1);
+		$string = $this->getIoBufferAsString(2);
 		$string = $arg_manager->toByteString($string);
 		return pack("H*", $string);
 	}

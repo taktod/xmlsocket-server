@@ -1,5 +1,7 @@
 package com.ttProject.php;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -22,7 +24,7 @@ import com.ttProject.server.net.xmlSocket.XmlSocketConnection;
 /**
  * sample socket adapter for PHP
  */
-public class PhpXmlSocketAdapter extends XmlSocketAdapter {
+public class PhpXmlSocketAdapter extends XmlSocketAdapter implements ActionListener {
 	/** quercus object */
 	private QuercusEx quercus;
 	public PhpXmlSocketAdapter() {
@@ -34,7 +36,7 @@ public class PhpXmlSocketAdapter extends XmlSocketAdapter {
 	@Override
 	public void start() {
 		try {
-			quercus.execute("php/start.php", "");
+			quercus.execute("php/start.php", ArgumentManager.getInstance().setArgument(this));
 		}
 		catch (IOException e) {
 		}
@@ -45,7 +47,7 @@ public class PhpXmlSocketAdapter extends XmlSocketAdapter {
 	@Override
 	public void stop() {
 		try {
-			quercus.execute("php/stop.php", "");
+			quercus.execute("php/stop.php", ArgumentManager.getInstance().setArgument(this));
 		}
 		catch (IOException e) {
 		}
@@ -56,7 +58,7 @@ public class PhpXmlSocketAdapter extends XmlSocketAdapter {
 	@Override
 	public boolean xmlConnect(XmlSocketConnection conn) {
 		try {
-			quercus.execute("php/connect.php", ArgumentManager.getInstance().setArgument(conn));
+			quercus.execute("php/connect.php", ArgumentManager.getInstance().setArgument(this, conn));
 		}
 		catch (IOException e) {
 		}
@@ -68,7 +70,7 @@ public class PhpXmlSocketAdapter extends XmlSocketAdapter {
 	@Override
 	public void xmlDisconnect(XmlSocketConnection conn) {
 		try {
-			quercus.execute("php/disconnect.php", ArgumentManager.getInstance().setArgument(conn));
+			quercus.execute("php/disconnect.php", ArgumentManager.getInstance().setArgument(this, conn));
 		}
 		catch (IOException e) {
 		}
@@ -80,7 +82,18 @@ public class PhpXmlSocketAdapter extends XmlSocketAdapter {
 	public void getData(XmlSocketConnection conn, IoBuffer data) {
 		try {
 			conn.resetPingCount();
-			quercus.execute("php/getData.php", ArgumentManager.getInstance().setArgument(conn, data));
+			quercus.execute("php/getData.php", ArgumentManager.getInstance().setArgument(this, conn, data));
+		}
+		catch (IOException e) {
+		}
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		try {
+			quercus.execute("php/actionEvent.php", ArgumentManager.getInstance().setArgument(this, event));
 		}
 		catch (IOException e) {
 		}
@@ -127,8 +140,8 @@ public class PhpXmlSocketAdapter extends XmlSocketAdapter {
 			QuercusPage page = parse(path);
 		    WriteStream os = new WriteStream(StdoutStream.create());
 
-		    os.setNewlineString("\n");
-		    os.setEncoding("UTF-8");
+		    os.setNewlineString("\r\n");
+//		    os.setEncoding("UTF-8");
 
 		    Env env = createEnv(page, os, null, null);
 		    env.setGlobalValue("_JAVAARG", objectToValue(arg));
